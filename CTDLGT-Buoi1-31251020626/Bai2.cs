@@ -1,38 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using System;
 
-namespace CTDLGT_Buoi1_31251020626
+class Bai2
 {
-    internal class Bai2
+    static void Main()
     {
-        public static void Main(string[] args)
+        int n = int.Parse(Console.ReadLine());
+        int[] a = new int[n];
+
+        for (int i = 0; i < n; i++)
         {
-            //Viết chương trình nhập ba số nguyên a, b và c. Chương trình xuất số lớn nhất, số nhỏ nhất, tổng và trung bình cộng của ba số.
-            Console.Write("Nhap a:");
-            int a = int.Parse(Console.ReadLine());
-            Console.Write("Nhap b:");
-            int b = int.Parse(Console.ReadLine());
-            Console.Write("Nhap c:");
-            int c = int.Parse(Console.ReadLine());
-            int max = a;
-            if (b > max)
-                max = b;
-            if (c > max)
-                max = c;
+            a[i] = int.Parse(Console.ReadLine());
+        }
 
-            int min = a;
-            if (b < min)
-                min = b;
-            if (c < min)
-                min = c;
+        int max1 = 0, max2 = 0;
+        bool coMax1 = false, coMax2 = false;
 
-            long tong = a + b + c;
-            double Avg = tong / 3.0;
-            Console.WriteLine($"Lon Nhat: {max}");
-            Console.WriteLine($"Nho Nhat: {min}");
-            Console.WriteLine($"Tong: {tong}");
-            Console.WriteLine($"Trung binh: {Avg}");
+        for (int i = 0; i < n; i++)
+        {
+            int x = a[i];
+
+            if (!coMax1 || x > max1)
+            {
+                if (coMax1)
+                {
+                    max2 = max1;
+                    coMax2 = true;
+                }
+
+                max1 = x;
+                coMax1 = true;
+            }
+            else if (x < max1 && (!coMax2 || x > max2))
+            {
+                max2 = x;
+                coMax2 = true;
+            }
+        }
+
+        if (coMax2)
+        {
+            Console.WriteLine(max1);
+            Console.WriteLine(max2);
+        }
+        else
+        {
+            Console.WriteLine("NO");
         }
     }
 }
